@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GrüneBank.Tests
@@ -95,6 +96,16 @@ namespace GrüneBank.Tests
             });
         }
 
+        [TestMethod]
+        public void Bank_FakeTest_Balance_Returns_50_000_000()
+        {
+            Bank b1 = new Bank();
 
+            using(ShimsContext.Create())
+            {
+                GrüneBank.Fakes.ShimBank.AllInstances.BalanceGet = x => 50_000_000m;
+                Assert.IsTrue(b1.Balance == 50_000_000);
+            }
+        }
     }
 }

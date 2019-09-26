@@ -1,6 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.QualityTools.Testing.Fakes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Pose;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,7 +55,7 @@ namespace GrüneBank.Tests
         [DataRow(2019, 9, 8, 13, 59, false)] //  13:59 -> zu
 
         // .. Alle DataRows für die ganze Woche (Mo-So) hier reinschreiben ;)
-        public void OpeningHours_isOpen(int year, int month, int day, int hour, int minute,bool expectedResult)
+        public void OpeningHours_isOpen(int year, int month, int day, int hour, int minute, bool expectedResult)
         {
             var testDay = new DateTime(year, month, day, hour, minute, 00);
             // testlogik:
@@ -72,6 +75,69 @@ namespace GrüneBank.Tests
             var oh = new OpeningHours();
 
             Assert.IsTrue(oh.IsNowOpen()); // Problem: Funktioniert vlt Fr und Sa aber Sonntag nicht mehr
+
+            // Microsoft.Fakes, FakesFramework (teil von VisualStudio Enterprise)
+        }
+
+        [TestMethod]
+        public void OpeningHours_IsNowOpen_Fakes()
+        {
+            // Microsoft.Fakes, FakesFramework (teil von VisualStudio Enterprise)
+            var oh = new OpeningHours();
+
+            // FakesFramework erstellt eine komplette Isolationsschicht für das .NET Framework
+            // Wenn jetzt jemand DateTime.Now haben will, können wir ein vordefiniertes Ergebnis zurückliefier
+
+            // Shim -> Microsoft-Name für "Mock"
+            using (ShimsContext.Create())
+            {
+                // Nur hier drinnen gilt unsere Fake-Konfiguration
+                System.Fakes.ShimDateTime.NowGet = () => new DateTime(1984, 1, 1, 14, 52, 40);
+
+                var uhrzeitFake = DateTime.Now; // Fake
+
+                System.Fakes.ShimDateTime.NowGet = () => new DateTime(1984, 1, 1, 14, 52, 40);
+
+                Assert.IsFalse(oh.IsNowOpen()); // Sonntag ;)
+
+                // Abhängigkeiten:
+                System.IO.Fakes.ShimFile.ExistsString = filename => true;
+
+                Assert.IsTrue(File.Exists("7:\\demo//$()()||||<<y.exe"));
+
+                // Roboterarm im Büro
+
+            }
+            var uhrzeitOriginal = DateTime.Now; // Original
+
+
+            Assert.IsTrue(oh.IsNowOpen());
+
+            // Ideal für folgende Situationen:
+            // Sensor sagt: zu heiß/zu kalt / es brennt
+            // Keine echte Datenbankverbindung
+            // REST-Service liefert immer den selben JSON-String 
+            // Datenbankergebnisse faken -> sehr schnell
+        }
+
+
+        // https://github.com/tonerdo/pose
+        // -> Über NuGet installieren
+        [TestMethod]
+        public void OpeningHours_IsNowOpen_Pose()
+        {
+            Shim dateShim = Shim.Replace(() => DateTime.Now)
+                                .With(() => new DateTime(1848, 3, 22, 12, 22, 50));
+
+            DateTime datum = DateTime.Now; // Original
+
+            PoseContext.Isolate(() =>
+            {
+
+                datum = DateTime.Now; // Fake
+
+            }, dateShim);
+
         }
     }
 }
