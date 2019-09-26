@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Taschenrechner
 {
-    public class Class1
+    public class Rechner
     {
+        public int Add(int z1, int z2)
+        {
+            return z1 + z2;
+        }
     }
 }
