@@ -8,27 +8,29 @@ namespace GrüneBank
 {
     public class Bank
     {
-        private decimal v;
+        public Bank() : this(0){} // Standardwert: 0
 
-        public Bank()
+        public Bank(decimal startBalance)
         {
+            if (startBalance < 0)
+                throw new ArgumentException();
+            Balance = startBalance;
         }
 
-        public Bank(decimal v)
+        public decimal Balance { get; private set; }
+
+        public void Deposit(decimal value)
         {
-            this.v = v;
+            if (value <= 0)
+                throw new ArgumentException();
+            Balance += value;
         }
 
-        public decimal Balance { get; set; }
-
-        public void Deposit(decimal v)
+        public void Withdraw(decimal value)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Withdraw(decimal withdrawValue)
-        {
-            throw new NotImplementedException();
+            if (value <= 0 || Balance - value < 0)
+                throw new ArgumentException();
+            Balance -= value;
         }
     }
 }

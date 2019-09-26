@@ -35,7 +35,7 @@ namespace GrüneBank.Tests
         [DataRow(2_000)]
         [DataRow(20_000)]
         [DataRow(200_000)]
-        public void Deposit_with_valid_value_sets_Balance(decimal depositValue)
+        public void Deposit_with_valid_value_sets_Balance(int depositValue)
         {
             Bank b1 = new Bank();
 
@@ -47,7 +47,7 @@ namespace GrüneBank.Tests
         [TestMethod]
         [DataRow(0)]
         [DataRow(-50)]
-        public void Deposit_with_invalid_value_throws_ArgumentException(decimal depositValue)
+        public void Deposit_with_invalid_value_throws_ArgumentException(int depositValue)
         {
             Bank b1 = new Bank();
 
@@ -61,7 +61,7 @@ namespace GrüneBank.Tests
         [DataRow(10_000,2_000)]
         [DataRow(20_000,20_000)] // Auf exakt 0 abheben
         [DataRow(300_000,200_000)]
-        public void Withdraw_with_valid_value_sets_Balance(decimal startBalance,decimal withdrawValue)
+        public void Withdraw_with_valid_value_sets_Balance(int startBalance,int withdrawValue)
         {
             Bank b1 = new Bank(startBalance);
 
@@ -70,9 +70,22 @@ namespace GrüneBank.Tests
         }
 
         [TestMethod]
+        [DataRow(10_000, -2_000)]
+        [DataRow(20_000, 0)] 
+        public void Withdraw_with_invalid_value_throws_ArgumentException(int startBalance, int withdrawValue)
+        {
+            Bank b1 = new Bank(startBalance);
+
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                b1.Withdraw(withdrawValue);
+            });
+        }
+
+        [TestMethod]
         [DataRow(10_000, 100_000)]
         [DataRow(20_000, 200_000)]
-        public void Withdraw_more_than_Balance_throws_ArgumentException(decimal startBalance, decimal withdrawValue)
+        public void Withdraw_more_than_Balance_throws_ArgumentException(int startBalance, int withdrawValue)
         {
             Bank b1 = new Bank(startBalance);
 
