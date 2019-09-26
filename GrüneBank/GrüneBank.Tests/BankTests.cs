@@ -107,5 +107,26 @@ namespace GrüneBank.Tests
                 Assert.IsTrue(b1.Balance == 50_000_000);
             }
         }
+
+        [TestMethod]
+        public void Bank_WealthTests()
+        {
+            Bank b1 = new Bank();
+
+            using (ShimsContext.Create())
+            {
+                GrüneBank.Fakes.ShimBank.AllInstances.BalanceGet = x => 0m;
+                Assert.AreEqual(Wealth.Zero,b1.Wealth);
+
+                GrüneBank.Fakes.ShimBank.AllInstances.BalanceGet = x => 20m;
+                Assert.AreEqual(Wealth.Poor, b1.Wealth);
+
+                GrüneBank.Fakes.ShimBank.AllInstances.BalanceGet = x => 200m;
+                Assert.AreEqual(Wealth.Ok, b1.Wealth);
+
+                GrüneBank.Fakes.ShimBank.AllInstances.BalanceGet = x => 50_000_000_000m;
+                Assert.AreEqual(Wealth.FirstPercent, b1.Wealth);
+            }
+        }
     }
 }

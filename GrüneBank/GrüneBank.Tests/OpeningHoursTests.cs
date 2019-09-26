@@ -138,6 +138,6 @@ namespace GrüneBank.Tests
 
             }, dateShim);
 
-        }
+         }
     }
 }
