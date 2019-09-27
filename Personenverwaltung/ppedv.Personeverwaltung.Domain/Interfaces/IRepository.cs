@@ -13,5 +13,7 @@ namespace ppedv.Personeverwaltung.Domain.Interfaces
         void Update<T>(T item) where T : Entity;
         T GetByID<T>(int id) where T : Entity;
         IEnumerable<T> GetAll<T>() where T : Entity;
+
+        void Save();
     }
 }
