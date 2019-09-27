@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robotech.Hardware.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Personenverwaltung.Logic.Tests", "ppedv.Personenverwaltung.Logic.Tests\ppedv.Personenverwaltung.Logic.Tests.csproj", "{178FC489-A025-4256-92C4-296CB951A255}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personenverwaltung.Konsole", "Personenverwaltung.Konsole\Personenverwaltung.Konsole.csproj", "{2221851F-C804-4B8A-AA78-6FFD25C4A06F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{178FC489-A025-4256-92C4-296CB951A255}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{178FC489-A025-4256-92C4-296CB951A255}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{178FC489-A025-4256-92C4-296CB951A255}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2221851F-C804-4B8A-AA78-6FFD25C4A06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2221851F-C804-4B8A-AA78-6FFD25C4A06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2221851F-C804-4B8A-AA78-6FFD25C4A06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2221851F-C804-4B8A-AA78-6FFD25C4A06F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{4916BB23-22B3-42AC-B415-5AADE04A000E} = {575C269B-704A-4821-9534-DF7056C0A35A}
 		{943F011C-34BF-4F03-8847-15DCB141D059} = {575C269B-704A-4821-9534-DF7056C0A35A}
 		{178FC489-A025-4256-92C4-296CB951A255} = {E2D50864-69D0-444F-96A7-00D5C2949801}
+		{2221851F-C804-4B8A-AA78-6FFD25C4A06F} = {E5A2AC6E-9FF1-4BC9-91FB-E23FF02D6F8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D279C4B2-CEF8-464B-B51A-3523657B4B53}
