@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using ppedv.Personeverwaltung.Domain;
 using ppedv.Personeverwaltung.Domain.Interfaces;
 
 namespace ppedv.Personenverwaltung.Logic.Tests
@@ -23,6 +24,16 @@ namespace ppedv.Personenverwaltung.Logic.Tests
         public void RecruitPersonsForDepartment_can_recruit_5_persons_with_MOQ()
         {
             var deviceMock = new Mock<IDevice>(); // Mach mir ein Fake basierend auf IDevice
+            //deviceMock.Setup(x => x.RecruitPerson())
+            //          .Returns(() => new Person { Vorname = "Mock", Nachname = "Person", Alter = 0, Kontostand = 0 });
+
+            deviceMock.SetupSequence(x => x.RecruitPerson())
+                      .Returns(() => new Person { Vorname = "Tom", Nachname = "Ate", Alter = 10, Kontostand = 100 })
+                      .Returns(() => new Person { Vorname = "Anna", Nachname = "Nass", Alter = 20, Kontostand = 20 })
+                      .Returns(() => new Person { Vorname = "Peter", Nachname = "Silie", Alter = 30, Kontostand = 33330 })
+                      .Returns(() => new Person { Vorname = "Franz", Nachname = "Ose", Alter = 40, Kontostand = -44440 })
+                      .Returns(() => new Person { Vorname = "Martha", Nachname = "Pfahl", Alter = 50, Kontostand = 55550 });
+
 
             Core core = new Core(deviceMock.Object); //.Object -> die echte Instanz dahinter
 
