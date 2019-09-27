@@ -19,6 +19,9 @@ namespace ppedv.Personenverwaltung.Logic
         // Irgendeine Logik, die mit IDevice arbeitet
         public IEnumerable<Person> RecruitPersonsForDepartment(int amount)
         {
+            if (amount < 0)
+                throw new ArgumentException();
+
             List<Person> newPersons = new List<Person>();
             for (int i = 0; i < amount; i++)
             {
