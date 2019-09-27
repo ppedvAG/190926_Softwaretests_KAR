@@ -44,5 +44,11 @@
     <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ppedv.Personeverwaltung.Domain\ppedv.Personeverwaltung.Domain.csproj">
+      <Project>{21BA694F-61CD-4D6E-B850-A68E4B97AD37}</Project>
+      <Name>ppedv.Personeverwaltung.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

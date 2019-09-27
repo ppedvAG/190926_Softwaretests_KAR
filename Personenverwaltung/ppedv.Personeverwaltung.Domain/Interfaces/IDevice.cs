@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Robotech.Hardware
+namespace ppedv.Personeverwaltung.Domain.Interfaces
 {
-    public class Class1
+    public interface IDevice
     {
+        Person RecruitPerson();
     }
 }

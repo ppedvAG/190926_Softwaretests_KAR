@@ -44,6 +44,7 @@
     <Compile Include="Abteilung.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Firma.cs" />
+    <Compile Include="Interfaces\IDevice.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
