@@ -39,7 +39,7 @@ namespace ppedv.Personenverwaltung.Logic.Tests
 
             var result = core.RecruitPersonsForDepartment(5);
 
-            result.Should().HaveCount(5);
+             result.Should().HaveCount(5);
             // Echte Mock-Feature:
             deviceMock.Verify(x => x.RecruitPerson(), Times.Exactly(5));
         }
