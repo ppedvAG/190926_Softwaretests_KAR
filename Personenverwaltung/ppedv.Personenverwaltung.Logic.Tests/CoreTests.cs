@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -61,6 +62,80 @@ namespace ppedv.Personenverwaltung.Logic.Tests
 
             // Echte Mock-Feature:
             deviceMock.Verify(x => x.RecruitPerson(), Times.Never);
+        }
+
+
+        [TestMethod]
+        public void GetAllPeople_returns_exactly_5_Persons()
+        {
+            var mockRepo = new Mock<IRepository>();
+            // Konfig: "Es sind 5 in der "DB" "
+            mockRepo.Setup(x => x.GetAll<Person>())
+                    .Returns(() => new List<Person>
+                    {
+                        new Person{Vorname="Tom1",Nachname="Ate"},
+                        new Person{Vorname="Tom2",Nachname="Ate"},
+                        new Person{Vorname="Tom3",Nachname="Ate"},
+                        new Person{Vorname="Tom4",Nachname="Ate"},
+                        new Person{Vorname="Tom5",Nachname="Ate"},
+                    });
+            Core core = new Core(null, mockRepo.Object); // null, weil hier kein IDevice benötigt wird
+
+            var result = core.GetAllPeople(); // ich hab alle 5 aus der "DB" bekommen
+            result.Should().HaveCount(5);
+        }
+
+
+        [TestMethod]
+        public void GetPersonWithHighestBalance_returns_correct_Person()
+        {
+            var mockRepo = new Mock<IRepository>();
+            Person correctResult = new Person { Vorname = "Tom3", Nachname = "Ate", Kontostand = 1_000_00 };
+            // Konfig: "Es sind 5 in der "DB" "
+            mockRepo.Setup(x => x.GetAll<Person>())
+                    .Returns(() => new List<Person>
+                    {
+                        new Person{Vorname="Tom1",Nachname="Ate",Kontostand=100},
+                        new Person{Vorname="Tom2",Nachname="Ate",Kontostand=100},
+                        correctResult,
+                        new Person{Vorname="Tom4",Nachname="Ate",Kontostand=100},
+                        new Person{Vorname="Tom5",Nachname="Ate",Kontostand=100},
+                    });
+            Core core = new Core(null, mockRepo.Object); // null, weil hier kein IDevice benötigt wird
+
+            var result = core.GetPersonWithHighestBalance();
+
+            // https://fluentassertions.com/objectgraphs/
+            result.Should().BeEquivalentTo(correctResult);
+        }
+
+        [TestMethod]
+        public void RecruitPersonsAndSaveInDB_calls_HW_and_saves_in_DB()
+        {
+            var hwmock = new Mock<IDevice>();
+            var dbmock = new Mock<IRepository>();
+
+            Core core = new Core(hwmock.Object, dbmock.Object);
+            core.RecruitPersonsAndSaveInDB(5);
+
+            hwmock.Verify(x => x.RecruitPerson(), Times.Exactly(5));
+            dbmock.Verify(x => x.Save(), Times.AtLeast(1));
+        }
+
+        [TestMethod]
+        public void RecruitPersonsAndSaveInDB_with_invalid_argument_throws_ArgumentException()
+        {
+            var hwmock = new Mock<IDevice>();
+            var dbmock = new Mock<IRepository>();
+
+            Core core = new Core(hwmock.Object, dbmock.Object);
+
+            core.Invoking(x => x.RecruitPersonsAndSaveInDB(-5))
+                .Should()
+                .ThrowExactly<ArgumentException>();
+
+            hwmock.Verify(x => x.RecruitPerson(), Times.Never);
+            dbmock.Verify(x => x.Save(), Times.Never);
         }
     }
 }
