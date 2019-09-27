@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Personeverwaltung.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Personenverwaltung.Data.EF", "ppedv.Personenverwaltung.Data.EF\ppedv.Personenverwaltung.Data.EF.csproj", "{2EB68134-E57B-44A1-8917-34E015022EE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.Personenverwaltung.Data.EF.Tests", "ppedv.Personenverwaltung.Data.EF.Tests\ppedv.Personenverwaltung.Data.EF.Tests.csproj", "{5E9D8257-6CE9-44ED-9488-EB07CC6BF140}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{2EB68134-E57B-44A1-8917-34E015022EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EB68134-E57B-44A1-8917-34E015022EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EB68134-E57B-44A1-8917-34E015022EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E9D8257-6CE9-44ED-9488-EB07CC6BF140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E9D8257-6CE9-44ED-9488-EB07CC6BF140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E9D8257-6CE9-44ED-9488-EB07CC6BF140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E9D8257-6CE9-44ED-9488-EB07CC6BF140}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{21BA694F-61CD-4D6E-B850-A68E4B97AD37} = {8F31D1C9-8E17-4641-A49C-80677BF7805B}
 		{2EB68134-E57B-44A1-8917-34E015022EE2} = {09991D28-F908-45D1-84A1-5E2E397EDFA2}
+		{5E9D8257-6CE9-44ED-9488-EB07CC6BF140} = {09991D28-F908-45D1-84A1-5E2E397EDFA2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D279C4B2-CEF8-464B-B51A-3523657B4B53}
