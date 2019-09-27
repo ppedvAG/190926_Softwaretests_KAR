@@ -14,7 +14,13 @@ namespace ppedv.Personenverwaltung.Logic
         {
             this.device = device;
         }
+        public Core(IDevice device, IRepository repository)
+        {
+            this.device = device;
+            this.repository = repository;
+        }
         private readonly IDevice device;
+        private readonly IRepository repository;
 
         // Irgendeine Logik, die mit IDevice arbeitet
         public IEnumerable<Person> RecruitPersonsForDepartment(int amount)
@@ -28,6 +34,30 @@ namespace ppedv.Personenverwaltung.Logic
                 newPersons.Add(device.RecruitPerson()); // z.B. 5 mal die Maschiene ansteuern
             }
             return newPersons;
+        }
+
+        // Logik, die auf die DB zugreift:
+
+        public IEnumerable<Person> GetAllPeople()
+        {
+            return repository.GetAll<Person>();
+        }
+        public Person GetPersonWithHighestBalance()
+        {
+            return GetAllPeople().OrderByDescending(x => x.Kontostand)
+                                 .First();
+        }
+
+
+        // Logik, die auf die HW UND die DB zugreift
+        public void RecruitPersonsAndSaveInDB(int amount)
+        {
+            var people = RecruitPersonsForDepartment(amount); // Maschine
+            foreach (var person in people)
+            {
+                repository.Add<Person>(person); // DB
+            }
+            repository.Save(); // DB
         }
     }
 }
